@@ -1,15 +1,37 @@
 package hellojpa;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.Date;
 
 @Entity
 public class Member {
+    @GeneratedValue
     @Id
+    @Column(name = "MEMBER_ID")
     private Long id;
-    private String name;
+    @Column(name = "USERNAME")
+    private String username;
 
-    public Long getId() {
+    //@Column(name = "TEAM_ID")
+    //private String teamId;
+
+    //private Integer age;
+    //@Enumerated(EnumType.STRING)
+    //private RoleType roleType;
+    //@Temporal(TemporalType.TIMESTAMP)
+    //private Date createdDate;
+    //@Temporal(TemporalType.TIMESTAMP)
+    //private Date lastModifiedDate;
+    //@Lob
+    //private String description;
+    //public Member(){
+
+    //}
+    @ManyToOne
+    @JoinColumn(name = "Team_ID")
+    private Team team;
+    public Long getId(){
         return id;
     }
 
@@ -17,11 +39,15 @@ public class Member {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Team getTeam() {
+        return team;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
